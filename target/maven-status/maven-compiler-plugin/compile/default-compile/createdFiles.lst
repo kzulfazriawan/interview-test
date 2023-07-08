@@ -1,0 +1,10 @@
+com/kzulfazriawan/tests/dtos/ResponseErrorDto.class
+com/kzulfazriawan/tests/entities/Inetnum.class
+com/kzulfazriawan/tests/configurations/CorsConfiguration.class
+com/kzulfazriawan/tests/controllers/Public.class
+com/kzulfazriawan/tests/services/InetnumService.class
+com/kzulfazriawan/tests/services/InetnumServiceInterface.class
+com/kzulfazriawan/tests/dtos/InetnumDto.class
+com/kzulfazriawan/tests/dtos/ResponseDataDto.class
+com/kzulfazriawan/tests/configurations/WebConfiguration.class
+com/kzulfazriawan/tests/repositories/InetnumRepositoryInterface.class

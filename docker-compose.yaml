@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  mariadb:
+    container_name: db_mariadb
+    image: mariadb:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_USER: ${MYSQL_USER:-myuser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mypassword}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-mypassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mydatabase}
+    volumes:
+      - mariadb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  app:
+    container_name: app_spring
+    depends_on:
+      - mariadb
+    build: .
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - .m2:/root/.m2
+      - .:/project
+    stdin_open: true
+    tty: true
+volumes:
+  mariadb:
