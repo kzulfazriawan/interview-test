@@ -56,13 +56,6 @@ public class SchedulerJobs {
         });
 
         newThread.start();
-//        try {
-//            //downloadFile(target, filename);
-//            //deCompressFile("./downloaded/" + filename, "./downloaded/apnic.db.inetnum");
-//            fileRead();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     private void downloadFile(String targetUrl, String targetFile) throws IOException {
@@ -123,7 +116,7 @@ public class SchedulerJobs {
             } else {
                 if (inetnumDto.getInetNum() != null && inetnumDto.getInetNum().length() > 1) {
                     Inetnum inetNumData = inetnumService.getOneByInetNum(inetnumDto.getInetNum());
-                    if(inetNumData != null){
+                    if (inetNumData != null) {
                         inetnumService.alter(inetNumData.getId(), inetnumDto);
                     } else {
                         inetnumService.insert(inetnumDto);
