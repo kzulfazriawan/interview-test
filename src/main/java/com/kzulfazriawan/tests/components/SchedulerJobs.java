@@ -22,7 +22,7 @@ public class SchedulerJobs {
     @Autowired
     private InetnumService inetnumService;
     private final String filename = "apnic.db.inetnum.gz";
-    private final String target = "https://github.com/kzulfazriawan/assets-writing/raw/master/";
+    private final String target = "https://ftp.apnic.net/apnic/whois/";
 
     private final SimpleDateFormat simpleDateFormat;
 
@@ -34,17 +34,28 @@ public class SchedulerJobs {
         listOfString.add("inetnum");
         listOfString.add("netname");
         listOfString.add("descr");
-        listOfString.add("country");
-        listOfString.add("status");
 
     }
 
 
-    @Scheduled(cron = "0 */3 * * * ?")
+    // 0AM AEST -> GMT+7 = 21PM
+    @Scheduled(cron = "0 21 * * *")
     public void ingestJob() {
         String now = simpleDateFormat.format(new Date());
         System.out.println("Java cron job expression:: " + now);
 
+        // Asyncronous run with thread
+        Thread newThread = new Thread(() -> {
+            try {
+                downloadFile(target, filename);
+                deCompressFile("./downloaded/" + filename, "./downloaded/apnic.db.inetnum");
+                fileRead();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        newThread.start();
 //        try {
 //            //downloadFile(target, filename);
 //            //deCompressFile("./downloaded/" + filename, "./downloaded/apnic.db.inetnum");
