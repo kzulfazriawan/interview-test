@@ -1,7 +1,6 @@
 package com.kzulfazriawan.tests.controllers;
 
 import com.kzulfazriawan.tests.dtos.InetnumDto;
-import com.kzulfazriawan.tests.entities.Inetnum;
 import com.kzulfazriawan.tests.services.InetnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,8 +35,8 @@ public class Public {
         return "Who is example usage /whois/?inetnum_value";
     }
 
-    @GetMapping("/whois/{inetnum}")
-    public ResponseEntity<List<InetnumDto>> whoIsInetNum(@PathVariable String inetnum) {
-        return ResponseEntity.status(HttpStatus.OK).body(inetnumService.all(inetnumService.getByInetNum(inetnum)));
+    @GetMapping("/whois/{inetnum}/{range}")
+    public ResponseEntity<List<InetnumDto>> whoIsInetNum(@PathVariable String inetnum, @PathVariable int range) {
+        return ResponseEntity.status(HttpStatus.OK).body(inetnumService.all(inetnumService.getStartWithByInetNum(inetnum)));
     }
 }

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
-import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -23,15 +21,6 @@ public class InetnumDto {
     private String netName;
 
     @NotEmpty
-    private String country;
-
-    @NotEmpty
-    private String status;
-
-    @NotEmpty
     private String description;
-
-    @NotEmpty
-    private Timestamp lastModified;
 
 }

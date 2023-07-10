@@ -2,8 +2,8 @@ package com.kzulfazriawan.tests.repositories;
 
 import com.kzulfazriawan.tests.entities.Inetnum;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface InetnumRepositoryInterface extends JpaRepository<Inetnum, Long> {
@@ -11,10 +11,10 @@ public interface InetnumRepositoryInterface extends JpaRepository<Inetnum, Long>
     /**
      * find by inetnum
      *
-     * @param inetnum String parameter
+     * @param inetNum String parameter
      * @return Object entity
      */
-    List<Inetnum> findByInetnum(String inetnum);
+    List<Inetnum> findByInetNum(String inetNum);
 
     /**
      * find by name
@@ -24,13 +24,14 @@ public interface InetnumRepositoryInterface extends JpaRepository<Inetnum, Long>
      */
     List<Inetnum> findByNetName(String netName);
 
-
     /**
-     * find by country
-     *
-     * @param country String parameter
+     * @param inetNum String parameter
      * @return Object entity
      */
-    List<Inetnum> findByCountry(String country);
+    Inetnum findOneByInetNum(String inetNum);
 
+    boolean existsByInetNum(String inetNum);
+
+    @Query("SELECT i FROM Inetnum i WHERE i.inetNum LIKE :inetNum%")
+    List<Inetnum> findByInetNumStartingWith(String inetNum);
 }

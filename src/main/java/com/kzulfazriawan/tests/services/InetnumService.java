@@ -3,19 +3,17 @@ package com.kzulfazriawan.tests.services;
 import com.kzulfazriawan.tests.dtos.InetnumDto;
 import com.kzulfazriawan.tests.entities.Inetnum;
 import com.kzulfazriawan.tests.repositories.InetnumRepositoryInterface;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InetnumService implements InetnumServiceInterface{
+@Service
+public class InetnumService implements InetnumServiceInterface {
     private final InetnumRepositoryInterface inetnumRepositoryInterface;
 
-    private final EntityManager entityManager;
-
-    public InetnumService(InetnumRepositoryInterface inetnumRepositoryInterface, EntityManager entityManager) {
+    public InetnumService(InetnumRepositoryInterface inetnumRepositoryInterface) {
         this.inetnumRepositoryInterface = inetnumRepositoryInterface;
-        this.entityManager = entityManager;
     }
 
     /**
@@ -25,18 +23,13 @@ public class InetnumService implements InetnumServiceInterface{
      * @return Object entity
      */
     @Override
-    public Inetnum insert(InetnumDto inetnumDto) {
+    public void insert(InetnumDto inetnumDto) {
         Inetnum inetnum = new Inetnum();
         inetnum.setNetName(inetnumDto.getNetName());
         inetnum.setInetNum(inetnumDto.getInetNum());
-        inetnum.setCountry(inetnumDto.getCountry());
         inetnum.setDescription(inetnumDto.getDescription());
-        inetnum.setStatus(inetnumDto.getStatus());
-        inetnum.setLastModified(inetnumDto.getLastModified());
 
         inetnumRepositoryInterface.save(inetnum);
-        entityManager.refresh(inetnum);
-        return inetnum;
     }
 
     /**
@@ -51,25 +44,14 @@ public class InetnumService implements InetnumServiceInterface{
     }
 
     /**
-     * filter by parameter country
-     *
-     * @param country String parameter
-     * @return Object entity
-     */
-    @Override
-    public List<Inetnum> getByNetCountry(String country) {
-        return inetnumRepositoryInterface.findByCountry(country);
-    }
-
-    /**
      * filter by parameter inetnum
      *
-     * @param inetnum String parameter
+     * @param inetNum String parameter
      * @return Object entity
      */
     @Override
-    public List<Inetnum> getByInetNum(String inetnum) {
-        return inetnumRepositoryInterface.findByInetnum(inetnum);
+    public List<Inetnum> getByInetNum(String inetNum) {
+        return inetnumRepositoryInterface.findByInetNum(inetNum);
     }
 
     /**
@@ -84,6 +66,28 @@ public class InetnumService implements InetnumServiceInterface{
     }
 
     /**
+     * get by parameter only one value
+     *
+     * @param inetNum String parameter
+     * @return Object entity
+     */
+    @Override
+    public Inetnum getOneByInetNum(String inetNum) {
+        if(inetnumRepositoryInterface.existsByInetNum(inetNum))
+            return inetnumRepositoryInterface.findOneByInetNum(inetNum);
+        return null;
+    }
+
+    /**
+     * @param inetNum
+     * @return
+     */
+    @Override
+    public List<Inetnum> getStartWithByInetNum(String inetNum) {
+        return inetnumRepositoryInterface.findByInetNumStartingWith(inetNum);
+    }
+
+    /**
      * alter object filtered by id
      *
      * @param id         Primary key
@@ -91,18 +95,13 @@ public class InetnumService implements InetnumServiceInterface{
      * @return Object entity
      */
     @Override
-    public Inetnum alter(Long id, InetnumDto inetnumDto) {
+    public void alter(Long id, InetnumDto inetnumDto) {
         Inetnum inetnum = getById(id);
         inetnum.setNetName(inetnumDto.getNetName());
         inetnum.setInetNum(inetnumDto.getInetNum());
-        inetnum.setCountry(inetnumDto.getCountry());
         inetnum.setDescription(inetnumDto.getDescription());
-        inetnum.setStatus(inetnumDto.getStatus());
-        inetnum.setLastModified(inetnumDto.getLastModified());
 
         inetnumRepositoryInterface.save(inetnum);
-        entityManager.refresh(inetnum);
-        return inetnum;
     }
 
     /**
@@ -121,15 +120,14 @@ public class InetnumService implements InetnumServiceInterface{
      * @param inetnum: user entities data
      * @return user data object
      */
-    private InetnumDto convertEntityToDto(Inetnum inetnum){
+    private InetnumDto convertEntityToDto(Inetnum inetnum) {
         InetnumDto inetnumDto = new InetnumDto();
         inetnumDto.setNetName(inetnum.getNetName());
-        inetnumDto.setStatus(inetnumDto.getStatus());
-        inetnumDto.setDescription(inetnumDto.getDescription());
-        inetnumDto.setInetNum(inetnumDto.getInetNum());
-        inetnumDto.setLastModified(inetnum.getLastModified());
+        inetnumDto.setDescription(inetnum.getDescription());
+        inetnumDto.setInetNum(inetnum.getInetNum());
+        inetnumDto.setId(inetnum.getId());
 
         return inetnumDto;
     }
-    
+
 }

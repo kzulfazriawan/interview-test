@@ -1,5 +1,12 @@
 /project/src/main/java/com/kzulfazriawan/tests/configurations/CorsConfiguration.java
+/project/src/main/java/com/kzulfazriawan/tests/services/InetnumService.java
+/project/src/main/java/com/kzulfazriawan/tests/configurations/WebConfiguration.java
+/project/src/main/java/com/kzulfazriawan/tests/repositories/InetnumRepositoryInterface.java
 /project/src/main/java/com/kzulfazriawan/tests/App.java
-/project/src/main/java/com/kzulfazriawan/tests/components/WebConfiguration.java
+/project/src/main/java/com/kzulfazriawan/tests/dtos/InetnumDto.java
+/project/src/main/java/com/kzulfazriawan/tests/dtos/ResponseErrorDto.java
 /project/src/main/java/com/kzulfazriawan/tests/controllers/Public.java
+/project/src/main/java/com/kzulfazriawan/tests/dtos/ResponseDataDto.java
+/project/src/main/java/com/kzulfazriawan/tests/entities/Inetnum.java
 /project/src/main/java/com/kzulfazriawan/tests/components/SchedulerJobs.java
+/project/src/main/java/com/kzulfazriawan/tests/services/InetnumServiceInterface.java

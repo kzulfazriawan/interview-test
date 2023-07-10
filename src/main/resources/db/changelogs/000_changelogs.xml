@@ -16,16 +16,7 @@
             <column name="net_name" type="varchar(199)">
                 <constraints nullable="false"/>
             </column>
-            <column name="country" type="varchar(199)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="varchar(199)">
-                <constraints nullable="false"/>
-            </column>
             <column name="description" type="text">
-                <constraints nullable="false" />
-            </column>
-            <column name="last_modified" type="timestamp">
                 <constraints nullable="false" />
             </column>
             <column name="created_at" type="timestamp" defaultValueComputed="current_timestamp">

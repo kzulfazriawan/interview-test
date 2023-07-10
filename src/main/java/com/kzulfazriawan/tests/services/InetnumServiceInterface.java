@@ -12,7 +12,7 @@ public interface InetnumServiceInterface {
      * @param inetnumDto Data Transfer Object
      * @return Object entity
      */
-    Inetnum insert(InetnumDto inetnumDto);
+    void insert(InetnumDto inetnumDto);
 
     /**
      * filter by parameter name
@@ -23,20 +23,12 @@ public interface InetnumServiceInterface {
     List<Inetnum> getByNetName(String name);
 
     /**
-     * filter by parameter country
-     *
-     * @param country String parameter
-     * @return Object entity
-     */
-    List<Inetnum> getByNetCountry(String country);
-
-    /**
      * filter by parameter inetnum
      *
-     * @param inetnum String parameter
+     * @param inetNum String parameter
      * @return Object entity
      */
-    List<Inetnum> getByInetNum(String inetnum);
+    List<Inetnum> getByInetNum(String inetNum);
 
     /**
      * filter by id
@@ -47,13 +39,23 @@ public interface InetnumServiceInterface {
     Inetnum getById(Long id);
 
     /**
+     * get by parameter only one value
+     *
+     * @param inetNum String parameter
+     * @return Object entity
+     */
+    Inetnum getOneByInetNum(String inetNum);
+
+    List<Inetnum> getStartWithByInetNum(String inetNum);
+
+    /**
      * alter object filtered by id
      *
-     * @param id Primary key
+     * @param id         Primary key
      * @param inetnumDto Data Transfer Object
      * @return Object entity
      */
-    Inetnum alter(Long id, InetnumDto inetnumDto);
+    void alter(Long id, InetnumDto inetnumDto);
 
     /**
      * show all DTO
